@@ -7,6 +7,7 @@ import NextEscapeSection from './components/NextEscapeSection';
 import HowItWorksSection from './components/HowItWorksSection';
 import ApplicationSection from './components/ApplicationSection';
 import Footer from './components/Footer';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
       <HowItWorksSection />
       <ApplicationSection />
       <Footer />
+      <Analytics />
     </div>
   );
 }
