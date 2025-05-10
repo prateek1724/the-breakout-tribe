@@ -24,7 +24,7 @@ const HeroSection: React.FC = () => {
           onClick={() => document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' })}
           className="animate-fade-in-up"
         >
-          Apply Now
+          Request Invite
         </Button>
       </div>
       

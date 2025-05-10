@@ -29,7 +29,7 @@ const HowItWorksSection: React.FC = () => {
         
         <div className="max-w-4xl mx-auto">
           <div className="relative">
-            <div className="absolute left-8 md:left-12 top-0 bottom-0 w-0.5 bg-gold/30 z-0"></div>
+            <div className="absolute left-8 md:left-12 top-0 h-[calc(100%-2rem)] w-0.5 bg-gold/30 z-0 hidden md:block"></div>
             
             <div className="space-y-12 md:space-y-16 relative z-10">
               {steps.map((step, index) => (
@@ -43,7 +43,7 @@ const HowItWorksSection: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="md:pt-3">
+                  <div className="md:pt-3 pl-0 md:pl-4">
                     <h3 className="text-xl md:text-2xl font-display font-bold mb-3 text-gold">
                       {step.title}
                     </h3>

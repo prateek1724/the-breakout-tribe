@@ -29,9 +29,9 @@ const ApplicationSection: React.FC = () => {
         {!formSubmitted ? (
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-3 text-gold text-center">
-              Apply to Join
+              Request to Join
             </h2>
-            <p className="text-lg text-softwhite text-center mb-10">
+            <p className="text-lg text-softwhite text-center mb-10 whitespace-nowrap">
               Only a handful of tribe members are invited on each journey. Apply early to be part of it.
             </p>
             

@@ -18,7 +18,7 @@ const WhyJoinSection: React.FC = () => {
     {
       title: "Organic Growth",
       image: "https://images.pexels.com/photos/725255/pexels-photo-725255.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      description: "Share raw moments, daring dreams, and bold ideas with those who get it.",
+      description: "We don’t call it networking — but when great minds travel together, ideas flow, intros unfold, and new possibilities take shape.",
       animation: "animate-fade-in-right"
     }
   ];
