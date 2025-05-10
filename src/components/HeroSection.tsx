@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
           Not a Trip. <span className="text-gold">A Tribe.</span>
         </h1>
         <h2 className="text-xl md:text-2xl text-softwhite font-sans mb-8 max-w-2xl mx-auto animate-fade-in-up">
-          Curated adventures for the few who dare.
+          An invite-only escape for high performers who’ve done the panels, the dinners, the polished intros — and now crave wild fun, real bonds, and a tribe that just might change everything.
         </h2>
         <Button 
           onClick={() => document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' })}

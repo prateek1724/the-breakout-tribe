@@ -31,8 +31,8 @@ const ApplicationSection: React.FC = () => {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-3 text-gold text-center">
               Request to Join
             </h2>
-            <p className="text-lg text-softwhite text-center mb-10 whitespace-nowrap">
-              Only a handful of tribe members are invited on each journey. Apply early to be part of it.
+            <p className="text-lg text-softwhite text-center mb-10">
+              Only a few join each escape — not because it's closed, but because it's carefully opened. If it feels right, don't wait
             </p>
             
             <div className="bg-charcoal border border-gold/30 rounded-lg p-8 md:p-10">

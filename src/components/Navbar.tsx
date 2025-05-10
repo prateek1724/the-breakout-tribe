@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Button from './Button';
+import tbtLogo from '../assets/tbt_logo.png';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,8 +24,9 @@ const Navbar: React.FC = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${navClass}`}>
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <a href="#" className="text-gold font-display text-2xl font-bold">
-            The Breakout Tribe
+          <a href="#" className="flex items-center space-x-3 text-gold font-display text-2xl font-bold">
+            <img src={tbtLogo} alt="The Breakout Tribe Logo" className="h-10 w-10 object-contain" />
+            <span>The Breakout Tribe</span>
           </a>
 
           {/* Desktop Menu */}
