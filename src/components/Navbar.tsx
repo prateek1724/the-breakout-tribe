@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
             <a href="#next-escape" className="text-softwhite hover:text-gold transition-colors">Next Escape</a>
             <a href="#how-it-works" className="text-softwhite hover:text-gold transition-colors">How It Works</a>
             <Button primary={false} onClick={() => document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' })}>
-              Apply Now
+            Request Invite
             </Button>
           </div>
 

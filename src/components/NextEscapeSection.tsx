@@ -19,7 +19,7 @@ const NextEscapeSection: React.FC = () => {
           </h2>
           <h3 className="text-xl text-white mb-6 font-medium">
             Langkawi, Malaysia
-            <span className="block text-amber mt-1">10 curated spots only.</span>
+            <span className="block text-amber mt-1">Limited Spots only.</span>
           </h3>
           
           <ul className="space-y-4 mb-8 text-softwhite/90">

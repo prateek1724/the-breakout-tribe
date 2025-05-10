@@ -19,7 +19,7 @@ const AboutSection: React.FC = () => {
             More Than a Trip —<br />A Story You'll Tell for Life.
           </h2>
           <p className="text-lg md:text-xl text-gold leading-relaxed font-medium">
-            An exclusive circle of dreamers, doers, and explorers — brought together by adventure, connected by stories, and growing together beyond the journey.
+          We replace office lights with golden sunsets, LinkedIn intros with shared adrenaline, and structured agendas with serendipity. For those who’ve made it — but crave meaning, wild fun, and the right people. This is where ideas spark over bonfires, stories collide with possibility, and bold escapes become the beginning of something much bigger.
           </p>
         </div>
       </div>
