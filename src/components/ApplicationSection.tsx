@@ -54,9 +54,30 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log('Form submitted:', values);
-    setFormSubmitted(true);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Submission failed:', errorData);
+        // You can also display an error message to the user here
+        return;
+      }
+  
+      // Success path
+      console.log('Form submitted successfully');
+      setFormSubmitted(true);
+    } catch (error) {
+      console.error('An error occurred during submission:', error);
+      // Optionally show a user-facing error
+    }
   };
 
   const handleBackClick = () => {

@@ -20,5 +20,6 @@ model User {
   dob             DateTime
   phone           String   @unique
   email           String   @unique
+  city            String
   linkedinProfile String   @map("linkedin_profile")
 }
