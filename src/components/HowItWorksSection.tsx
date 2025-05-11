@@ -1,6 +1,15 @@
-import React from 'react';
-import { CheckCircle2 } from 'lucide-react';
+'use client';
 
+import React from 'react';
+import { Card, CardContent, CardTitle, CardDescription } from './ui/card';
+
+/**
+ * HowItWorksSection component explains the process of joining The Breakout Tribe.
+ * Displays a vertical timeline with numbered steps, each with a title and description.
+ * Features a vertical line connecting the steps for visual continuity.
+ * 
+ * @returns {JSX.Element} The rendered HowItWorksSection component
+ */
 const HowItWorksSection: React.FC = () => {
   const steps = [
     {
@@ -33,9 +42,9 @@ const HowItWorksSection: React.FC = () => {
             
             <div className="space-y-12 md:space-y-16 relative z-10">
               {steps.map((step, index) => (
-                <div 
-                  key={index} 
-                  className="flex flex-col md:flex-row items-start gap-6"
+                <Card 
+                  key={index}
+                  className="flex flex-col md:flex-row items-start gap-6 bg-transparent border-none shadow-none"
                 >
                   <div className="flex-shrink-0 z-10 bg-charcoal">
                     <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-gold/10 border-2 border-gold flex items-center justify-center text-gold font-display text-2xl md:text-3xl font-bold">
@@ -43,15 +52,15 @@ const HowItWorksSection: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="md:pt-3 pl-0 md:pl-4">
-                    <h3 className="text-xl md:text-2xl font-display font-bold mb-3 text-gold">
+                  <CardContent className="md:pt-3 pl-0 md:pl-4 p-0">
+                    <CardTitle className="text-xl md:text-2xl font-display font-bold mb-3 text-gold">
                       {step.title}
-                    </h3>
-                    <p className="text-softwhite/80 text-lg">
+                    </CardTitle>
+                    <CardDescription className="text-softwhite/80 text-lg">
                       {step.description}
-                    </p>
-                  </div>
-                </div>
+                    </CardDescription>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
@@ -61,4 +70,4 @@ const HowItWorksSection: React.FC = () => {
   );
 };
 
-export default HowItWorksSection
+export default HowItWorksSection; 
