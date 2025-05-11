@@ -78,7 +78,7 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
               Request to Join
             </h2>
             <p className="text-lg text-softwhite text-center mb-10">
-              Only a few join each escape — not because it&apos;s closed, but because it&apos;s carefully opened. If it feels right, don&apos;t wait
+              Only a few join each escape — not because it's closed, but because it's carefully opened. If it feels right, don't wait
             </p>
             
             <div className="bg-charcoal border border-gold/30 rounded-lg p-8 md:p-10">

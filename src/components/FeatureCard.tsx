@@ -42,13 +42,15 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       { threshold: 0.3 }
     );
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
+    const currentRef = cardRef.current;
+
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -61,10 +63,12 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       <div className="h-64 overflow-hidden relative">
         {image.startsWith('http') ? (
           // For remote images
-          <img 
+          <Image 
             src={image} 
-            alt={title} 
-            className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-700 hover:scale-110"
           />
         ) : (
           // For local images
