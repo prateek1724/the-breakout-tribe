@@ -1,26 +1,72 @@
-import React, { useState } from 'react';
-import Button from './Button';
+'use client';
 
-const ApplicationSection: React.FC = () => {
+import React, { useState } from 'react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { ArrowLeft } from 'lucide-react';
+
+const formSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  dob: z.string().min(1, { message: 'Date of birth is required.' }),
+  phone: z.string()
+    .min(10, { message: 'Phone number must be at least 10 digits.' })
+    .regex(/^\+?[0-9\s\-()]+$/, { message: 'Please enter a valid phone number.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
+  profession: z.string().min(1, { message: 'Profession is required.' }),
+  whyJoin: z.string().min(1, { message: 'Please tell us why you want to join.' }),
+});
+
+interface ApplicationSectionProps {
+  onBack?: () => void;
+}
+
+/**
+ * ApplicationSection component displays a form for users to apply to join The Breakout Tribe.
+ * Features form validation using Zod schema and displays a success message after submission.
+ * 
+ * @returns {JSX.Element} The rendered ApplicationSection component
+ */
+const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    dob: '',
-    phone: '',
-    email: '',
-    profession: '',
-    whyJoin: ''
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      dob: '',
+      phone: '',
+      email: '',
+      profession: '',
+      whyJoin: '',
+    },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log('Form submitted:', values);
+    setFormSubmitted(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormSubmitted(true);
+  const handleBackClick = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      // Fallback to scrolling if no onBack handler is provided
+      const expectationsSection = document.getElementById('expectations');
+      if (expectationsSection) {
+        expectationsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -40,96 +86,165 @@ const ApplicationSection: React.FC = () => {
                 Are you ready to Breakout?
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-softwhite mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-md bg-charcoal border border-gold/30 text-softwhite focus:outline-none focus:border-gold"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">Full Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
 
-                <div>
-                  <label htmlFor="dob" className="block text-softwhite mb-2">Date of Birth</label>
-                  <input
-                    type="date"
-                    id="dob"
+                  <FormField
+                    control={form.control}
                     name="dob"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-md bg-charcoal border border-gold/30 text-softwhite focus:outline-none focus:border-gold"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">Date of Birth</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="date"
+                            {...field}
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
 
-                <div>
-                  <label htmlFor="phone" className="block text-softwhite mb-2">Phone</label>
-                  <input
-                    type="tel"
-                    id="phone"
+                  <FormField
+                    control={form.control}
                     name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-md bg-charcoal border border-gold/30 text-softwhite focus:outline-none focus:border-gold"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">Phone</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="tel"
+                            pattern="[0-9\s\-+()]+"
+                            placeholder="+1 (555) 123-4567"
+                            {...field}
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-softwhite mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
+                  
+                  <FormField
+                    control={form.control}
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-md bg-charcoal border border-gold/30 text-softwhite focus:outline-none focus:border-gold"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">Email Address</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            inputMode="email"
+                            placeholder="your.email@example.com"
+                            {...field}
+                            onBlur={(e) => {
+                              field.onBlur();
+                              if (e.target.value && !e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                                form.setError('email', { 
+                                  type: 'manual', 
+                                  message: 'Please enter a valid email address' 
+                                });
+                              } else if (e.target.value) {
+                                form.clearErrors('email');
+                              }
+                            }}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              if (e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                                form.clearErrors('email');
+                              }
+                            }}
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                
-                <div>
-                  <label htmlFor="profession" className="block text-softwhite mb-2">What Do You Do?</label>
-                  <input
-                    type="text"
-                    id="profession"
+                  
+                  <FormField
+                    control={form.control}
                     name="profession"
-                    value={formData.profession}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-md bg-charcoal border border-gold/30 text-softwhite focus:outline-none focus:border-gold"
-                    placeholder="Your profession or passion"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">What Do You Do?</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            placeholder="Your profession or passion"
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                
-                <div>
-                  <label htmlFor="whyJoin" className="block text-softwhite mb-2">Why do you want to join The Breakout Tribe? (In one line)</label>
-                  <input
-                    type="text"
-                    id="whyJoin"
+                  
+                  <FormField
+                    control={form.control}
                     name="whyJoin"
-                    value={formData.whyJoin}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-md bg-charcoal border border-gold/30 text-softwhite focus:outline-none focus:border-gold"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">Why do you want to join The Breakout Tribe? (In one line)</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                
-                <div className="pt-4">
-                  <Button type="submit" className="w-full md:w-auto">
-                    Submit Application
-                  </Button>
-                </div>
-              </form>
+                  
+                  <div className="pt-4 flex justify-center gap-4">
+                    <Button 
+                      variant="ghost" 
+                      className="text-gold hover:text-gold/80 hover:bg-transparent flex items-center gap-1"
+                      onClick={handleBackClick}
+                      type="button"
+                    >
+                      <ArrowLeft size={16} />
+                      <span>Back to expectations</span>
+                    </Button>
+                    <Button type="submit" variant="goldFilled">
+                      SUBMIT APPLICATION
+                    </Button>
+                  </div>
+                </form>
+              </Form>
             </div>
           </div>
         ) : (
           <div className="max-w-2xl mx-auto text-center py-16">
+            <div className="flex justify-start mb-6">
+              <Button 
+                variant="ghost" 
+                className="text-gold hover:text-gold/80 hover:bg-transparent p-0 flex items-center gap-1"
+                onClick={handleBackClick}
+              >
+                <ArrowLeft size={16} />
+                <span>Back to Escape</span>
+              </Button>
+            </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-gold">
               Thank you - The Adventure Awaits You.
             </h2>
@@ -141,4 +256,4 @@ const ApplicationSection: React.FC = () => {
   );
 };
 
-export default ApplicationSection
+export default ApplicationSection;

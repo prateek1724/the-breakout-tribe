@@ -1,10 +1,20 @@
-import React from 'react';
-import { Mail, Instagram, Facebook } from 'lucide-react';
+'use client';
 
+import React from 'react';
+import { Mail } from 'lucide-react';
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { Container } from './ui/container';
+import { Button } from './ui/button';
+
+/**
+ * Footer component for The Breakout Tribe website
+ * Displays company name, tagline, social media links, and copyright information
+ * @returns {JSX.Element} The rendered Footer component
+ */
 const Footer: React.FC = () => {
   return (
     <footer className="py-12 bg-charcoal text-stone">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+      <Container>
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <h2 className="text-gold font-display text-2xl font-bold mb-2">
@@ -17,24 +27,45 @@ const Footer: React.FC = () => {
           
           <div className="flex flex-col items-center md:items-end">
             <div className="flex space-x-4 mb-4">
-              <a href="mailto:hq@thebreakoutribe.com" className="text-stone hover:text-gold transition-colors">
-                <Mail size={20} />
-              </a>
-              <a href="#" className="text-stone hover:text-gold transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-stone hover:text-gold transition-colors">
-                <Facebook size={20} />
-              </a>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-stone hover:text-gold hover:bg-transparent"
+                asChild
+              >
+                <a href="mailto:hq@thebreakoutribe.com" aria-label="Email">
+                  <Mail className="h-5 w-5" />
+                </a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-stone hover:text-gold hover:bg-transparent"
+                asChild
+              >
+                <a href="#" aria-label="Instagram">
+                  <FaInstagram className="h-5 w-5" />
+                </a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-stone hover:text-gold hover:bg-transparent"
+                asChild
+              >
+                <a href="#" aria-label="Facebook">
+                  <FaFacebook className="h-5 w-5" />
+                </a>
+              </Button>
             </div>
             <p className="text-stone/70 text-sm">
               © 2025 The Breakout Tribe. All Rights Reserved.
             </p>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };
 
-export default Footer;
+export default Footer; 
