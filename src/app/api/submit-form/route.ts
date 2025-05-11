@@ -16,6 +16,15 @@ const formSchema = z.object({
   linkedin: z.string().url(),
 });
 
+function isPrismaKnownError(error: unknown): error is { code: string } {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'code' in error &&
+    typeof (error as { code: unknown }).code === 'string'
+  );
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -50,21 +59,21 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Validation failed', issues: error.errors },
         { status: 400 }
       );
     }
-
-    if (error.code === 'P2002') {
+  
+    if (isPrismaKnownError(error) && error.code === 'P2002') {
       return NextResponse.json(
         { error: 'A user with this phone or email already exists' },
         { status: 409 }
       );
     }
-
+  
     console.error('Internal Server Error:', error);
     return NextResponse.json(
       { error: 'Internal Server Error' },
