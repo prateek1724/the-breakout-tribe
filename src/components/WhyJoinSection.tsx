@@ -16,13 +16,13 @@ const WhyJoinSection: React.FC = () => {
   const features = [
     {
       title: "Curated Adventures",
-      image: "https://images.pexels.com/photos/12125348/pexels-photo-12125348.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      image: "/assets/curated_adventures.png",
       description: "Handpicked escapes — hidden beaches, private yacht parties, wild cliff dives, and once-in-a-lifetime thrills with a circle of extraordinary souls.",
       animation: "animate-fade-in-left"
     },
     {
       title: "Real Connections",
-      image: "https://images.pexels.com/photos/7149136/pexels-photo-7149136.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      image: "/assets/real_connections.png",
       description: "More than conversations, more than contacts — it's where great minds meet under open skies, and lifelong alliances are born in laughter and adventure.",
       animation: "animate-fade-in"
     },

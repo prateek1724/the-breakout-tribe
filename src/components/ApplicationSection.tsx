@@ -18,13 +18,14 @@ import { ArrowLeft } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  gender: z.string().min(1, { message: 'Gender is required.' }),
+  city: z.string().min(1, { message: 'City is required.' }),
   dob: z.string().min(1, { message: 'Date of birth is required.' }),
   phone: z.string()
     .min(10, { message: 'Phone number must be at least 10 digits.' })
     .regex(/^\+?[0-9\s\-()]+$/, { message: 'Please enter a valid phone number.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
-  profession: z.string().min(1, { message: 'Profession is required.' }),
-  whyJoin: z.string().min(1, { message: 'Please tell us why you want to join.' }),
+  linkedin: z.string().url({ message: 'Please enter a valid LinkedIn profile URL.' }),
 });
 
 interface ApplicationSectionProps {
@@ -44,11 +45,12 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
+      gender: '',
+      city: '',
       dob: '',
       phone: '',
       email: '',
-      profession: '',
-      whyJoin: '',
+      linkedin: '',
     },
   });
 
@@ -94,6 +96,40 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-softwhite">Full Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="gender"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">Gender</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-softwhite">City</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -179,33 +215,17 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
-                    name="profession"
+                    name="linkedin"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-softwhite">What Do You Do?</FormLabel>
+                        <FormLabel className="text-softwhite">LinkedIn Profile</FormLabel>
                         <FormControl>
                           <Input
-                            {...field}
-                            placeholder="Your profession or passion"
-                            className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="whyJoin"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-softwhite">Why do you want to join The Breakout Tribe? (In one line)</FormLabel>
-                        <FormControl>
-                          <Input
+                            type="url"
+                            placeholder="https://linkedin.com/in/your-profile"
                             {...field}
                             className="bg-charcoal border border-gold/30 text-softwhite focus:border-gold focus-visible:ring-0 focus-visible:ring-offset-0"
                           />
