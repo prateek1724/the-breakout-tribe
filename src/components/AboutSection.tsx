@@ -27,10 +27,10 @@ const AboutSection: React.FC = () => {
         <Card className="max-w-3xl mx-auto bg-transparent border-none shadow-none">
           <CardContent className="p-0 text-center" style={{ background: 'transparent' }}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-8 text-white">
-              More Than a Trip —<br />A Story You'll Tell for Life.
+              More Than a Trip —<br />A Story You&apos;ll Tell for Life.
             </h2>
             <p className="text-lg md:text-xl text-gold leading-relaxed font-medium">
-              We replace office lights with golden sunsets, LinkedIn intros with shared adrenaline, and structured agendas with serendipity. For those who've made it — but crave meaning, wild fun, and the right people. This is where ideas spark over bonfires, stories collide with possibility, and bold escapes become the beginning of something much bigger.
+              We replace office lights with golden sunsets, LinkedIn intros with shared adrenaline, and structured agendas with serendipity. For those who&apos;ve made it — but crave meaning, wild fun, and the right people. This is where ideas spark over bonfires, stories collide with possibility, and bold escapes become the beginning of something much bigger.
             </p>
           </CardContent>
         </Card>

@@ -15,7 +15,7 @@ const HowItWorksSection: React.FC = () => {
     {
       number: 1,
       title: "Apply for the Tribe",
-      description: "Fill out our application form. We're looking for curious minds and adventurous spirits."
+      description: "Fill out our application form. We&apos;re looking for curious minds and adventurous spirits."
     },
     {
       number: 2,

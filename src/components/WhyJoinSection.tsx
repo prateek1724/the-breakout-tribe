@@ -23,13 +23,13 @@ const WhyJoinSection: React.FC = () => {
     {
       title: "Real Connections",
       image: "https://images.pexels.com/photos/7149136/pexels-photo-7149136.jpeg?auto=compress&cs=tinysrgb&w=1920",
-      description: "More than conversations, more than contacts — it's where great minds meet under open skies, and lifelong alliances are born in laughter and adventure.",
+      description: "More than conversations, more than contacts — it&apos;s where great minds meet under open skies, and lifelong alliances are born in laughter and adventure.",
       animation: "animate-fade-in"
     },
     {
       title: "Unscripted Possibilities",
       image: "/assets/unscripted_possibilities_img.png",
-      description: "We don't call it networking — but when bold minds travel together, ideas flow, intros unfold, and new possibilities take shape.",
+      description: "We don&apos;t call it networking — but when bold minds travel together, ideas flow, intros unfold, and new possibilities take shape.",
       animation: "animate-fade-in-right"
     }
   ];

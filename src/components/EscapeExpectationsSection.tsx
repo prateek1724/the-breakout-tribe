@@ -17,12 +17,12 @@ import * as z from 'zod';
 
 const options = [
   "I want to meet people who just get it",
-  "I've been craving deep, off-script conversations",
+  "I&apos;ve been craving deep, off-script conversations",
   "I want to be surprised by who I connect with",
-  "I'm looking for something I'll still talk about 10 years from now",
-  "I'm curious where the right people + the right setting can take me",
+  "I&apos;m looking for something I&apos;ll still talk about 10 years from now",
+  "I&apos;m curious where the right people + the right setting can take me",
   "I want to share energy with others who move the same way I do",
-  "I've had success — now I want substance",
+  "I&apos;ve had success — now I want substance",
   "I want to disconnect from noise and reconnect with what matters",
   "I want to be in a room (or on a cliff) with people who challenge and inspire me",
 ];
@@ -51,7 +51,7 @@ interface EscapeExpectationsSectionProps {
 }
 
 /**
- * EscapeExpectationsSection component displays a form for users to select what they're looking for from the escape.
+ * EscapeExpectationsSection component displays a form for users to select what they&apos;re looking for from the escape.
  * Features form validation using Zod schema and allows selecting 2-3 options.
  * Maintains state when navigating back from the application form.
  * 

@@ -40,7 +40,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onRequestInvite }) => {
           "text-xl md:text-2xl text-softwhite font-sans mb-8 max-w-2xl mx-auto",
           "animate-fade-in-up"
         )}>
-          An invite-only escape for high performers who've done the panels, the dinners, the polished intros — and now crave wild fun, real bonds, and a tribe that just might change everything.
+          An invite-only escape for high performers who&apos;ve done the panels, the dinners, the polished intros — and now crave wild fun, real bonds, and a tribe that just might change everything.
         </h2>
         <Button 
           onClick={onRequestInvite}
