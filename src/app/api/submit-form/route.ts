@@ -11,9 +11,10 @@ const formSchema = z.object({
   dob: z.string().min(1),  // Will be converted to Date
   phone: z.string()
     .min(10)
-    .regex(/^\+?[0-9\s\-()]+$/),
+    .regex(/^[+]?\d[0-9\s\-()]+$/),
   email: z.string().email(),
   linkedin: z.string().url(),
+  country: z.string().min(1), // Added country as required
 });
 
 function isPrismaKnownError(error: unknown): error is { code: string } {
@@ -34,9 +35,10 @@ export async function POST(req: NextRequest) {
       name,
       gender,
       dob,
-      city,
       phone,
       email,
+      city,
+      country,
       linkedin: linkedinProfile,
     } = validatedData;
 
@@ -47,9 +49,10 @@ export async function POST(req: NextRequest) {
         name,
         gender,
         dob: dobDate,
-        city,
         phone,
         email,
+        city,
+        country,
         linkedinProfile,
       },
     });

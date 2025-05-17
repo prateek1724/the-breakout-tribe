@@ -21,7 +21,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Search, ArrowLeft } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { countries } from 'countries-list';
 import PhoneInput from 'react-phone-number-input';
 import type { Country } from 'react-phone-number-input';
@@ -69,17 +69,13 @@ const formSchema = z.object({
   linkedin: z.string().url({ message: 'Please enter a valid LinkedIn profile URL.' }),
 });
 
-interface ApplicationSectionProps {
-  onBack?: () => void;
-}
-
 /**
  * ApplicationSection component displays a form for users to apply to join The Breakout Tribe.
  * Features form validation using Zod schema and displays a success message after submission.
  * 
  * @returns {JSX.Element} The rendered ApplicationSection component
  */
-const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
+const ApplicationSection: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
   const [cities, setCities] = useState<ICity[]>([]);
@@ -191,12 +187,6 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
     } catch (error) {
       console.error('An error occurred during submission:', error);
       // Optionally show a user-facing error
-    }
-  };
-  
-  const handleBackClick = () => {
-    if (onBack) {
-      onBack();
     }
   };
 
@@ -618,17 +608,6 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
                   />
                   
                   <div className="pt-4 flex justify-center gap-4">
-                    {onBack && (
-                      <Button 
-                        variant="ghost" 
-                        className="text-gold hover:text-gold/80 hover:bg-transparent flex items-center gap-1"
-                        onClick={handleBackClick}
-                        type="button"
-                      >
-                        <ArrowLeft size={16} />
-                        <span>Back</span>
-                      </Button>
-                    )}
                     <Button type="submit" variant="goldFilled">
                       SUBMIT APPLICATION
                     </Button>
@@ -639,18 +618,6 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
           </div>
         ) : (
           <div className="max-w-2xl mx-auto text-center py-16">
-            {onBack && (
-              <div className="flex justify-start mb-6">
-                <Button 
-                  variant="ghost" 
-                  className="text-gold hover:text-gold/80 hover:bg-transparent p-0 flex items-center gap-1"
-                  onClick={handleBackClick}
-                >
-                  <ArrowLeft size={16} />
-                  <span>Back</span>
-                </Button>
-              </div>
-            )}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-gold">
               Thank you - The Adventure Awaits You.
             </h2>

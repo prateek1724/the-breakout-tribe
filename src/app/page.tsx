@@ -103,16 +103,17 @@ export default function Home() {
    * Handles the transition from expectations selection back to application form
    * Preserves the selected expectations state and shows the application section
    */
-  const handleBack = () => {
-    setShowExpectationsSection(false);
-    // Scroll to the application section
-    setTimeout(() => {
-      const applicationSection = document.getElementById('apply');
-      if (applicationSection) {
-        applicationSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
+  // currently not used as we don't have a back button.
+  // const handleBack = () => {
+  //   setShowExpectationsSection(false);
+  //   // Scroll to the application section
+  //   setTimeout(() => {
+  //     const applicationSection = document.getElementById('apply');
+  //     if (applicationSection) {
+  //       applicationSection.scrollIntoView({ behavior: 'smooth' });
+  //     }
+  //   }, 100);
+  // };
 
   return (
     <div className="font-sans text-charcoal">
@@ -123,7 +124,7 @@ export default function Home() {
       <NextEscapeSection />
       <HowItWorksSection />
       {!showExpectationsSection ? (
-        <ApplicationSection onBack={handleBack} />
+        <ApplicationSection />
       ) : (
         <EscapeExpectationsSection onNext={handleNext} initialExpectations={selectedExpectations} />
       )}
