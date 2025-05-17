@@ -21,13 +21,13 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { ArrowLeft, Search } from 'lucide-react';
+import { Search, ArrowLeft } from 'lucide-react';
 import { countries } from 'countries-list';
 import PhoneInput from 'react-phone-number-input';
+import type { Country } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'react-phone-number-input';
-import { City, Country, ICity } from 'country-state-city';
-import { FixedSizeList as List } from 'react-window';
+import { City, ICity } from 'country-state-city';
 
 // Convert country code to flag emoji
 const getCountryFlagEmoji = (countryCode: string) => {
@@ -73,30 +73,6 @@ interface ApplicationSectionProps {
   onBack?: () => void;
 }
 
-// Add a custom ItemVirtualizer component to handle focus issues
-const ItemVirtualizer = ({ 
-  items, 
-  renderItem, 
-  height, 
-  itemHeight 
-}: { 
-  items: any[]; 
-  renderItem: (item: any, index: number) => React.ReactNode; 
-  height: number; 
-  itemHeight: number; 
-}) => {
-  return (
-    <div className="pt-1 w-full" style={{ height }}>
-      {items.map((item, index) => renderItem(item, index))}
-    </div>
-  );
-};
-
-// Replace the existing uniqueId function with a more robust ID generator
-function getUniqueId() {
-  return Date.now().toString(36) + Math.random().toString(36).substring(2);
-}
-
 /**
  * ApplicationSection component displays a form for users to apply to join The Breakout Tribe.
  * Features form validation using Zod schema and displays a success message after submission.
@@ -105,7 +81,7 @@ function getUniqueId() {
  */
 const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<string | undefined>(undefined);
+  const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
   const [cities, setCities] = useState<ICity[]>([]);
   const [countryFilterInput, setCountryFilterInput] = useState("");
   const [cityFilterInput, setCityFilterInput] = useState("");
@@ -142,7 +118,7 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
 
   // Add memoized filtered data
   const filteredCountries = useMemo(() => {
-    return Object.entries(countries).filter(([_, country]) => 
+    return Object.entries(countries).filter(([, country]) => 
       country.name.toLowerCase().includes(countryFilterInput.toLowerCase())
     );
   }, [countryFilterInput]);
@@ -215,6 +191,12 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
     } catch (error) {
       console.error('An error occurred during submission:', error);
       // Optionally show a user-facing error
+    }
+  };
+  
+  const handleBackClick = () => {
+    if (onBack) {
+      onBack();
     }
   };
 
@@ -304,7 +286,7 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
                           onValueChange={(value) => {
                             console.log("Country selected:", value);
                             field.onChange(value);
-                            setSelectedCountry(value);
+                            setSelectedCountry(value as Country);
                             // Reset city when country changes
                             form.setValue('city', '');
                             
@@ -556,7 +538,7 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
                             <PhoneInput
                               international
                               countryCallingCodeEditable={true}
-                              defaultCountry={selectedCountry as any}
+                              defaultCountry={selectedCountry}
                               value={field.value}
                               onChange={(value) => {
                                 // Set the value
@@ -635,7 +617,18 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
                     )}
                   />
                   
-                  <div className="pt-4 flex justify-center">
+                  <div className="pt-4 flex justify-center gap-4">
+                    {onBack && (
+                      <Button 
+                        variant="ghost" 
+                        className="text-gold hover:text-gold/80 hover:bg-transparent flex items-center gap-1"
+                        onClick={handleBackClick}
+                        type="button"
+                      >
+                        <ArrowLeft size={16} />
+                        <span>Back</span>
+                      </Button>
+                    )}
                     <Button type="submit" variant="goldFilled">
                       SUBMIT APPLICATION
                     </Button>
@@ -646,6 +639,18 @@ const ApplicationSection: React.FC<ApplicationSectionProps> = ({ onBack }) => {
           </div>
         ) : (
           <div className="max-w-2xl mx-auto text-center py-16">
+            {onBack && (
+              <div className="flex justify-start mb-6">
+                <Button 
+                  variant="ghost" 
+                  className="text-gold hover:text-gold/80 hover:bg-transparent p-0 flex items-center gap-1"
+                  onClick={handleBackClick}
+                >
+                  <ArrowLeft size={16} />
+                  <span>Back</span>
+                </Button>
+              </div>
+            )}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6 text-gold">
               Thank you - The Adventure Awaits You.
             </h2>
