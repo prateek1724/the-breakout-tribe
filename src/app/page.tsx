@@ -19,7 +19,7 @@ import Footer from '@/components/Footer';
  * @returns {JSX.Element} The rendered Home page component
  */
 export default function Home() {
-  const [showApplicationSection, setShowApplicationSection] = useState(false);
+  const [showExpectationsSection, setShowExpectationsSection] = useState(false);
   /**
    * State to store and persist the user's selected expectations between components
    * This allows the selections to be retained when navigating back from the application form
@@ -31,20 +31,20 @@ export default function Home() {
    * or the expectations section, depending on which one is currently visible
    */
   const handleRequestInvite = () => {
-    if (showApplicationSection) {
-      // If application section is showing, scroll to it
-      setTimeout(() => {
-        const applicationSection = document.getElementById('apply');
-        if (applicationSection) {
-          applicationSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
+    if (showExpectationsSection) {
       // If expectations section is showing, scroll to it
       setTimeout(() => {
         const expectationsSection = document.getElementById('expectations');
         if (expectationsSection) {
           expectationsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If application section is showing, scroll to it
+      setTimeout(() => {
+        const applicationSection = document.getElementById('apply');
+        if (applicationSection) {
+          applicationSection.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
     }
@@ -82,34 +82,34 @@ export default function Home() {
   }, []);
 
   /**
-   * Handles the transition from expectations selection to application form
-   * Stores the selected expectations and shows the application section
+   * Handles the transition from application form to expectations selection
+   * Stores the selected expectations and shows the expectations section
    * 
    * @param {string[]} expectations - Array of selected expectation options
    */
   const handleNext = (expectations: string[]) => {
     setSelectedExpectations(expectations);
-    setShowApplicationSection(true);
-    // Scroll to the application section
-    setTimeout(() => {
-      const applicationSection = document.getElementById('apply');
-      if (applicationSection) {
-        applicationSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
-
-  /**
-   * Handles the transition from application form back to expectations selection
-   * Preserves the selected expectations state and shows the expectations section
-   */
-  const handleBack = () => {
-    setShowApplicationSection(false);
+    setShowExpectationsSection(true);
     // Scroll to the expectations section
     setTimeout(() => {
       const expectationsSection = document.getElementById('expectations');
       if (expectationsSection) {
         expectationsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  /**
+   * Handles the transition from expectations selection back to application form
+   * Preserves the selected expectations state and shows the application section
+   */
+  const handleBack = () => {
+    setShowExpectationsSection(false);
+    // Scroll to the application section
+    setTimeout(() => {
+      const applicationSection = document.getElementById('apply');
+      if (applicationSection) {
+        applicationSection.scrollIntoView({ behavior: 'smooth' });
       }
     }, 100);
   };
@@ -122,10 +122,10 @@ export default function Home() {
       <WhyJoinSection />
       <NextEscapeSection />
       <HowItWorksSection />
-      {!showApplicationSection ? (
-        <EscapeExpectationsSection onNext={handleNext} initialExpectations={selectedExpectations} />
-      ) : (
+      {!showExpectationsSection ? (
         <ApplicationSection onBack={handleBack} />
+      ) : (
+        <EscapeExpectationsSection onNext={handleNext} initialExpectations={selectedExpectations} />
       )}
       <Footer />
     </div>

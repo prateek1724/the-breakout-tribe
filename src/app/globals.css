@@ -26,3 +26,43 @@ body {
   color: var(--foreground);
   font-family: 'Poppins', sans-serif;
 }
+
+/* Phone Input Styling */
+.PhoneInput {
+  width: 100%;
+}
+
+.PhoneInput .PhoneInputCountry {
+  margin-right: 0.5rem;
+}
+
+.PhoneInputInput {
+  flex: 1;
+  padding: 0.5rem;
+  background-color: #1E1E1E; /* matches bg-charcoal */
+  color: #F5F5F5; /* matches text-softwhite */
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.PhoneInputInput:focus {
+  outline: none;
+  border: none;
+}
+
+.PhoneInputCountrySelect {
+  color: #F5F5F5;
+  background-color: #1E1E1E;
+}
+
+/* Make sure dropdown menus in the phone input match the theme */
+.PhoneInputCountrySelectArrow {
+  color: #DCAC4C; /* matches gold color */
+}
+
+/* Style the flag emoji */
+.PhoneInputCountryFlag {
+  margin-right: 0.5rem;
+}
