@@ -21,5 +21,6 @@ model User {
   phone           String   @unique
   email           String   @unique
   city            String
+  country         String
   linkedinProfile String   @map("linkedin_profile")
 }
